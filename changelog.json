@@ -1,5 +1,16 @@
 [
   {
+    "version": "v1.9.6",
+    "date": "2026-04-28",
+    "features": [
+      "🆕 Settings → Обновления — нов таб (admin only) с пълен update контрол: показва текуща и налична версия, позволява ръчно или автоматично обновяване (с прозорец 02:00-04:00 нощем по подразбиране), показва списък на резервните копия с download. По време на update показва live прогрес (backup → pull → restart → health check).",
+      "🔵 Header badge „Налична нова версия v1.9.X“ — появява се автоматично когато има налично обновление. Click → отваря Settings → Обновления. Polling на всеки 5 мин."
+    ],
+    "internal": [
+      "Етап 4 от Multi-Instance Plan (Settings UI) завършен. routers/updates.py — proxy към internal updater container; admin-only; inject UPDATER_API_KEY header. Frontend компоненти: UpdatesTab.jsx (Settings таб), UpdateBadge.jsx (header indicator). Hash-driven навигация: #updates подаден от badge към Settings tab."
+    ]
+  },
+  {
     "version": "v1.9.5",
     "date": "2026-04-28",
     "fixes": [
