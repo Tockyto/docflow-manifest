@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.13",
+    "date": "2026-04-29",
+    "internal": [
+      "Smoke test за UI update flow на двата tenants (NRJSoft + Swissport) след v1.9.10 changelog sync fix + v1.9.11/12 единен compose. Тази версия съществува за да validate-нем че: (1) updater detect-ва нова версия от manifest, (2) backup → pull → restart → health check → version verify минава, (3) changelog sync автоматично копира от новия image (header показва v1.9.13 без manual cp), (4) и двата tenants преминават flow-а със споделения parameterized compose. Няма функционални промени."
+    ]
+  },
+  {
     "version": "v1.9.12",
     "date": "2026-04-29",
     "internal": [
