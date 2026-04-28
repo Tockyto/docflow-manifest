@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.9",
+    "date": "2026-04-28",
+    "internal": [
+      "Финален end-to-end test на self-update flow след всички defensive fix-ове в v1.9.8.1. Тази версия съществува за да validate-нем че: (1) UI badge се появява, (2) progress bar анимира 0→100%, (3) backup → pull → restart → health check → version verify минава, (4) auto-reload на UI след success. Няма функционални промени."
+    ]
+  },
+  {
     "version": "v1.9.8.1",
     "date": "2026-04-28",
     "fixes": [
