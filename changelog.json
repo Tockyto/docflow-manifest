@@ -1,5 +1,17 @@
 [
   {
+    "version": "v1.9.8.1",
+    "date": "2026-04-28",
+    "fixes": [
+      "Updater verify-ва deployed версия след update — ако compose deploy-не различен image от targeta (напр. при stale IMAGE_TAG в .env.production override-ващ .env), update-ът се halt-ва вместо silent success. Apr 28 lesson: при retry update към v1.9.8, .env.production имаше stale IMAGE_TAG=1.9.3 → updater тихо deploy-ваше 1.9.3 + reportваше success. Сега се hвалва.",
+      "deploy.sh cleanup-ва stale compose substitution variables (IMAGE_TAG, COMPOSE_HOST_DIR, INSTANCE_NAME) от .env.production при всеки deploy. Тези var-и са за compose substitution (.env), не за container env (.env.production); ако случайно са в грешния файл, override-ват правилните стойности.",
+      "UI polling в Settings → Обновления tolerate-ва 502/503 по време на container restart (без да спира poll-а). Преди това: при HTTP error setStatus не се вика → polling продължаваше но UI оставаше stuck на „Update в ход\". Defensive handling за 'idle' state transition също."
+    ],
+    "internal": [
+      "Нова docs/UPDATER_OPERATIONS.md с manual recovery procedures, troubleshooting на най-честите failure modes (auth, project name, bind paths, stale env), updater self-update procedure."
+    ]
+  },
+  {
     "version": "v1.9.8",
     "date": "2026-04-28",
     "features": [
