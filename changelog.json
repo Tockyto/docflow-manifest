@@ -1,5 +1,15 @@
 [
   {
+    "version": "v1.9.4",
+    "date": "2026-04-28",
+    "internal": [
+      "Sidecar updater контейнер (Етап 3 от Multi-Instance Plan). Per-tenant FastAPI service, който: (1) hourly poll-ва public manifest за нова версия, (2) при /update заявка прави DB backup, pull-ва new image, recreate-ва app container, health check 60s, halt-and-alert email при провал. Endpoints: GET /healthz, /check, POST /update, GET /status, GET /backups, GET /backups/{name}/download. Auth: X-Updater-Key header. Mount-нат docker socket за orchestration. Image: ghcr.io/tockyto/docflow-updater:1.9.4.",
+      "Public companion repo Tockyto/docflow-manifest (public) с manifest.json + changelog.json mirror. Auto-updated от release.yml workflow на всеки git tag push.",
+      "Public version endpoint: GET /api/system/version (no auth) — backstop за external monitoring ако updater-ът сам падне.",
+      "Manifest fetch failure detection: 3 consecutive failures → email alert; counter resetnal при възстановяване."
+    ]
+  },
+  {
     "version": "v1.9.3",
     "date": "2026-04-28",
     "internal": [
