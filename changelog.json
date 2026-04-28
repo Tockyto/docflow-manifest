@@ -1,5 +1,21 @@
 [
   {
+    "version": "v1.9.8",
+    "date": "2026-04-28",
+    "features": [
+      "📊 Settings → Обновления — нов прогрес бар по време на update! Показва процент (0% → 100%) и фаза (1/4 Резервно копие → 2/4 Сваляне → 3/4 Рестартиране → 4/4 Готово). Анимиран gradient fill, изчиства се след успех."
+    ],
+    "fixes": [
+      "Updater контейнер успешно изпълнява `docker pull` за private ghcr.io image-и (mount-нат /root/.docker/config.json:ro). Преди това update-ите falling-ваха с „unauthorized“ грешка.",
+      "Updater compose execution използва правилен COMPOSE_PROJECT_NAME (равен на INSTANCE_NAME) — преди се опитваше да създаде нови containers/volumes под дефолтното project име „compose“ вместо да recreate-ва съществуващите.",
+      "Updater bind mounts резолват с правилни paths host↔container: компосе dir-ът се mount-ва на същия абсолютен path вътре в updater (`/opt/docflow:/opt/docflow`), за да docker daemon-ът намери `./data/changelog.json` и др. relative bind-ове."
+    ],
+    "internal": [
+      "deploy.sh пише INSTANCE_NAME + COMPOSE_HOST_DIR в .env per tenant (compose substitution). TENANT_INSTANCE_NAMES таблица в скрипта (NRJSoft → 'docflow', Swissport → 'docflow-swissport') match-ва историческите container names.",
+      "docker-compose.yml: updater service env vars + volumes сега ползват ${INSTANCE_NAME} / ${COMPOSE_HOST_DIR} substitution с ${VAR:-default} fallback за safety."
+    ]
+  },
+  {
     "version": "v1.9.7",
     "date": "2026-04-28",
     "internal": [
