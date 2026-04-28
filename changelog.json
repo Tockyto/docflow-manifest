@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.5",
+    "date": "2026-04-28",
+    "fixes": [
+      "Public /api/system/version endpoint (добавен в v1.9.4) се блокираше от auth middleware-а — добавен в AUTH_SKIP_PATHS. Сега updater-ът може да чете current version от app container-а; external monitoring също."
+    ]
+  },
+  {
     "version": "v1.9.4",
     "date": "2026-04-28",
     "internal": [
