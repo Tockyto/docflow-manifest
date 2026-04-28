@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.7",
+    "date": "2026-04-28",
+    "internal": [
+      "Smoke test на end-to-end self-update flow. Тази версия съществува само за да тестваме UI badge → click → live update sequence в production. Няма функционални промени спрямо v1.9.6."
+    ]
+  },
+  {
     "version": "v1.9.6",
     "date": "2026-04-28",
     "features": [
