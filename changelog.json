@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.10",
+    "date": "2026-04-29",
+    "fixes": [
+      "Updater автоматично sync-ва changelog.json от новия image на host след successful update — header вече показва новата версия веднага, без manual `cp`. Преди това: след self-update API-ът връщаше новата версия, но UI changelog оставаше stale до ръчен sync на хоста."
+    ]
+  },
+  {
     "version": "v1.9.9",
     "date": "2026-04-28",
     "internal": [
