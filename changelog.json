@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.14",
+    "date": "2026-04-29",
+    "internal": [
+      "Втори smoke test за UI update flow на двата tenants. Без функционални промени."
+    ]
+  },
+  {
     "version": "v1.9.13",
     "date": "2026-04-29",
     "internal": [
