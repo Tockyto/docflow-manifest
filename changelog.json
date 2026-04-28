@@ -1,5 +1,13 @@
 [
   {
+    "version": "v1.9.12",
+    "date": "2026-04-29",
+    "internal": [
+      "docker-compose.yml е сега ЕДИН за всички tenants (NRJSoft + Swissport + бъдещи). Tenant-specific values (container_name, ports, NAS path) идват от .env (compose substitution), генериран от deploy.sh. Преди това: NRJSoft compose-ът беше repo-tracked, Swissport имаше patched copy на сървъра — drift риск ако някой пуснеше `bash deploy.sh swissport` (overwrite на patches). Сега `bash deploy.sh swissport` работи безопасно. Нови env vars: HOST_PORT, UPDATER_HOST_PORT, MARIADB_HOST_PORT, NAS_SUBPATH.",
+      "Compose mount тестове са обновени да позволяват ${VAR:-default} substitution-и за tenant-config (INSTANCE_NAME, MARIADB_HOST_PORT, NAS_SUBPATH) без да отслабват credential guard-а — той сега whitelist-ва точните credential vars (MARIADB_ROOT_PASSWORD, MARIADB_PASSWORD, MARIADB_USER, MARIADB_DATABASE)."
+    ]
+  },
+  {
     "version": "v1.9.10",
     "date": "2026-04-29",
     "fixes": [
