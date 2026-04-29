@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.15",
+    "date": "2026-04-29",
+    "fixes": [
+      "🔥 КРИТИЧЕН: Backup-ите при self-update бяха fake — последните 8 файла на NAS-а са по 127 bytes (само gzip header). Updater-ът викаше `mysqldump`, но `mariadb:11` image-ът няма този binary в PATH (само `mariadb-dump`). Pipeline-ът `mysqldump | gzip > file` връщаше rc=0 защото gzip успяваше с празен stdin. Сега: правилен `mariadb-dump` binary, `bash -c 'set -o pipefail; ...'` за да pipe failure return-не rc≠0, post-create size check (<1 KB → halt update) като sanity guard. Ако beше се случил истински update fail досега, нямаше как да rollback-нем — backup-ите са празни."
+    ]
+  },
+  {
     "version": "v1.9.14",
     "date": "2026-04-29",
     "internal": [
