@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.23",
+    "date": "2026-04-29",
+    "internal": [
+      "Smoke test release — без функционални промени. Verifying че целият update flow работи end-to-end след closing pass-а в v1.9.22 (UPDATER_API_KEY active, schema_migrations warning gone, sanitized changelog). UI няма да показва тази версия (само internal entry → филтрирана от App.jsx)."
+    ]
+  },
+  {
     "version": "v1.9.22",
     "date": "2026-04-29",
     "fixes": [
