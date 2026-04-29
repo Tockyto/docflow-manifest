@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.24",
+    "date": "2026-04-29",
+    "internal": [
+      "/api/system/version приема HEAD method (за UptimeRobot free tier който default-ва към HEAD). Без HEAD: 405 Method Not Allowed → monitor-ът report-ваше Down."
+    ]
+  },
+  {
     "version": "v1.9.23",
     "date": "2026-04-29",
     "internal": [
