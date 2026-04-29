@@ -1,5 +1,15 @@
 [
   {
+    "version": "v1.9.27",
+    "date": "2026-04-29",
+    "improvements": [
+      "Автоматично обновяване по подразбиране — когато излезе нова версия, инстанциите я инсталират сами (с backup) в рамките на час, без да чакат admin click. Може да се изключи per инстанция."
+    ],
+    "internal": [
+      "AUTO_UPDATE env var в updater (default true). manifest_poller извиква callback при detect-ване на нова версия → ако auto-update on и executor свободен → run_update в background. deploy.sh без аргументи вече прави release-only (push tag + чака CI), без SSH; --ssh флаг за emergency hotfix."
+    ]
+  },
+  {
     "version": "v1.9.26",
     "date": "2026-04-29",
     "improvements": [
