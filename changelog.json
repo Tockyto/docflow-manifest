@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.22",
+    "date": "2026-04-29",
+    "fixes": [
+      "По-чисти системни логове при стартиране (без излишни предупреждения)."
+    ]
+  },
+  {
     "version": "v1.9.21",
     "date": "2026-04-29",
     "fixes": [
@@ -74,7 +81,7 @@
     "version": "v1.9.10",
     "date": "2026-04-29",
     "fixes": [
-      "Updater автоматично sync-ва changelog.json от новия image на host след successful update — header вече показва новата версия веднага, без manual `cp`. Преди това: след self-update API-ът връщаше новата версия, но UI changelog оставаше stale до ръчен sync на хоста."
+      "След автоматично обновление „Какво ново“ показва веднага новата версия."
     ]
   },
   {
@@ -88,12 +95,8 @@
     "version": "v1.9.8.1",
     "date": "2026-04-28",
     "fixes": [
-      "Updater verify-ва deployed версия след update — ако compose deploy-не различен image от targeta (напр. при stale IMAGE_TAG в .env.production override-ващ .env), update-ът се halt-ва вместо silent success. Apr 28 lesson: при retry update към v1.9.8, .env.production имаше stale IMAGE_TAG=1.9.3 → updater тихо deploy-ваше 1.9.3 + reportваше success. Сега се hвалва.",
-      "deploy.sh cleanup-ва stale compose substitution variables (IMAGE_TAG, COMPOSE_HOST_DIR, INSTANCE_NAME) от .env.production при всеки deploy. Тези var-и са за compose substitution (.env), не за container env (.env.production); ако случайно са в грешния файл, override-ват правилните стойности.",
-      "UI polling в Settings → Обновления tolerate-ва 502/503 по време на container restart (без да спира poll-а). Преди това: при HTTP error setStatus не се вика → polling продължаваше но UI оставаше stuck на „Update в ход\". Defensive handling за 'idle' state transition също."
-    ],
-    "internal": [
-      "Нова docs/UPDATER_OPERATIONS.md с manual recovery procedures, troubleshooting на най-честите failure modes (auth, project name, bind paths, stale env), updater self-update procedure."
+      "Автоматичното обновление проверява че реално е инсталирана точната версия преди да отчете успех.",
+      "По-стабилен прогрес индикатор по време на ъпдейт — UI продължава да следи статуса докато контейнерите се рестартират."
     ]
   },
   {
@@ -103,13 +106,7 @@
       "📊 Settings → Обновления — нов прогрес бар по време на update! Показва процент (0% → 100%) и фаза (1/4 Резервно копие → 2/4 Сваляне → 3/4 Рестартиране → 4/4 Готово). Анимиран gradient fill, изчиства се след успех."
     ],
     "fixes": [
-      "Updater контейнер успешно изпълнява `docker pull` за private ghcr.io image-и (mount-нат /root/.docker/config.json:ro). Преди това update-ите falling-ваха с „unauthorized“ грешка.",
-      "Updater compose execution използва правилен COMPOSE_PROJECT_NAME (равен на INSTANCE_NAME) — преди се опитваше да създаде нови containers/volumes под дефолтното project име „compose“ вместо да recreate-ва съществуващите.",
-      "Updater bind mounts резолват с правилни paths host↔container: компосе dir-ът се mount-ва на същия абсолютен path вътре в updater (`/opt/docflow:/opt/docflow`), за да docker daemon-ът намери `./data/changelog.json` и др. relative bind-ове."
-    ],
-    "internal": [
-      "deploy.sh пише INSTANCE_NAME + COMPOSE_HOST_DIR в .env per tenant (compose substitution). TENANT_INSTANCE_NAMES таблица в скрипта (NRJSoft → 'docflow', Swissport → 'docflow-swissport') match-ва историческите container names.",
-      "docker-compose.yml: updater service env vars + volumes сега ползват ${INSTANCE_NAME} / ${COMPOSE_HOST_DIR} substitution с ${VAR:-default} fallback за safety."
+      "По-стабилно автоматично обновление — контейнерите се обновяват и рестартират коректно."
     ]
   },
   {
@@ -134,7 +131,7 @@
     "version": "v1.9.5",
     "date": "2026-04-28",
     "fixes": [
-      "Public /api/system/version endpoint (добавен в v1.9.4) се блокираше от auth middleware-а — добавен в AUTH_SKIP_PATHS. Сега updater-ът може да чете current version от app container-а; external monitoring също."
+      "Поправен достъп до публичния endpoint за текуща версия (използва се от автоматичното обновление и външен мониторинг)."
     ]
   },
   {
@@ -168,18 +165,17 @@
     "version": "v1.9.1.1",
     "date": "2026-04-26",
     "fixes": [
-      "Архивът показваше „празен“ след v1.9.1 deploy. Причина: при унифицирането на docker-compose между dev и prod бяха пропуснати два critical bind mount-а — `/mnt/nas/docflow:/app/storage` (NAS архивът) и `./data/changelog.json:/app/changelog.json`. Container-ът mount-ваше празен named volume вместо NAS. Fixed през hotfix на live compose + добавени regression тестове в `tests/test_docker_compose_mounts.py` (test_prod_compose_has_nas_bind_mount, test_prod_compose_has_changelog_mount)."
+      "Поправен Архив след ъпдейт — файловете на NAS-а отново се виждат коректно."
     ]
   },
   {
     "version": "v1.9.1",
     "date": "2026-04-25",
     "fixes": [
-      "Multi-tenant deploy: docker-compose mount-ите за schema.sql и seed-offices.sql сега сочат директно към app/ (git-tracked), вместо към дублираща копия в /opt/docflow/. Това elimin-ира schema drift-а който се натрупваше месеци наред и причини грешки при стартиране на нова инсталация (Swissport).",
-      "Fresh install: поправен FK ordering в schema.sql (offices сега е преди users) + добавени липсващите suppliers и audit_log таблици. Без тях fresh install с празна база крашваше при FK validation.",
-      "Admin потребител: при clone от production schema (или restore от backup) admin вече се създава автоматично, ако не съществува в users таблицата. Преди това проверката беше „users таблицата не съществува“ → пропускаше този сценарий.",
-      "Премахнати hardcoded fallback пароли в docker-compose.yml. MariaDB credentials сега се четат единствено от .env.production (env_file).",
-      "Премахнат шумен AttributeError в логовете при login. passlib (dead upstream, последен release 1.7.4 от 2020) е заменен с native bcrypt 4.3.0 чрез нов services/password.py helper. Съществуващите password хешове ($2b$ формат) остават валидни — нула миграция на DB паролите."
+      "Подобрена надеждност при инсталиране на нова инсталация (за нови клиенти).",
+      "Admin потребителят се създава автоматично при възстановяване от резервно копие, ако липсва.",
+      "Сигурно управление на пароли — credentials се четат само от защитен конфигурационен файл, без вградени fallback-и.",
+      "По-чисти логове при вход в системата."
     ]
   },
   {
