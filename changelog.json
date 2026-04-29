@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.18",
+    "date": "2026-04-29",
+    "internal": [
+      "Final smoke test за v1.9.17 backup fix — verify че self-update flow създава реален MB-размер backup на двата tenants."
+    ]
+  },
+  {
     "version": "v1.9.17",
     "date": "2026-04-29",
     "fixes": [
