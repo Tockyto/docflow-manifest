@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.16",
+    "date": "2026-04-29",
+    "internal": [
+      "Smoke test за v1.9.15 backup fix — verify че self-update flow създава реален MB-размер backup (а не fake 127-byte gzip header)."
+    ]
+  },
+  {
     "version": "v1.9.15",
     "date": "2026-04-29",
     "fixes": [
