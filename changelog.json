@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.19",
+    "date": "2026-04-29",
+    "internal": [
+      "Ръчен UI test за update flow от tenant-а — потребителят ще click-не „Update сега“ в UI на NRJSoft и Swissport. Без функционални промени."
+    ]
+  },
+  {
     "version": "v1.9.18",
     "date": "2026-04-29",
     "internal": [
