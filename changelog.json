@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.9.20",
+    "date": "2026-04-29",
+    "fixes": [
+      "Tenant isolation fix: системната папка `backups/` вече не се показва в Архив root (важи за всички tenants). Beforehand: NRJSoft tenant виждаше backups + Swissport папките поради празен NAS_SUBPATH. Сега NAS_SUBPATH=/NRJSoft per tenant + code-level filter на системни folder-и в storage browse."
+    ]
+  },
+  {
     "version": "v1.9.19",
     "date": "2026-04-29",
     "internal": [
