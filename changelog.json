@@ -1,9 +1,16 @@
 [
   {
+    "version": "v1.9.17",
+    "date": "2026-04-29",
+    "fixes": [
+      "Backup fix #2: разделени mariadb-dump и gzip в две команди (no pipe). v1.9.15 използваше `bash -c 'set -o pipefail; ...'`, но updater minimal image няма /bin/bash → halt-ваше с FileNotFoundError. Сега: dump към .sql, после gzip в place (.sql → .sql.gz). Plus size check (<1 KB → halt) като sanity guard срещу бъдещи silent failures."
+    ]
+  },
+  {
     "version": "v1.9.16",
     "date": "2026-04-29",
     "internal": [
-      "Smoke test за v1.9.15 backup fix — verify че self-update flow създава реален MB-размер backup (а не fake 127-byte gzip header)."
+      "Smoke test за v1.9.15 backup fix — flow halt-на с /bin/bash not found (image е минимален). Fix продължава в v1.9.17."
     ]
   },
   {
