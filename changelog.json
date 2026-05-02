@@ -1,5 +1,12 @@
 [
   {
+    "version": "v1.10.13",
+    "date": "2026-05-02",
+    "improvements": [
+      "Подзаглавието 'By NRJSoft' в хедъра е дясно подравнено — 't' на NRJSoft пада точно под 'w' на DocFlow."
+    ]
+  },
+  {
     "version": "v1.10.12",
     "date": "2026-05-02",
     "improvements": [
