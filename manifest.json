@@ -1,9 +1,9 @@
 {
-  "latest": "3.2.1",
-  "released_at": "2026-08-05T09:06:13Z",
+  "latest": "3.3.0",
+  "released_at": "2026-08-06T09:34:53Z",
   "min_compatible": "1.9.0",
-  "image": "ghcr.io/tockyto/docflow:3.2.1",
-  "updater_image": "ghcr.io/tockyto/docflow-updater:3.2.1",
+  "image": "ghcr.io/tockyto/docflow:3.3.0",
+  "updater_image": "ghcr.io/tockyto/docflow-updater:3.3.0",
   "changelog_url": "https://raw.githubusercontent.com/Tockyto/docflow-manifest/main/changelog.json",
   "schema_version": 1
 }
