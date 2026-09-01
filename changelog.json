@@ -1,5 +1,12 @@
 [
   {
+    "version": "v3.7.88",
+    "date": "2026-09-02",
+    "improvements": [
+      "Екраните на TechFlow са на последното издание."
+    ]
+  },
+  {
     "version": "v3.7.87",
     "date": "2026-09-01",
     "improvements": [
