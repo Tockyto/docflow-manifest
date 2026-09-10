@@ -1,28 +1,39 @@
 # DocFlow Manifest
 
-Public manifest за update discovery от DocFlow инстанции. Auto-updated от
-[Tockyto/docflow](https://github.com/Tockyto/docflow) release workflow.
+Публичен манифест за update discovery. Съдържа **само** текущата стабилна версия —
+толкова, колкото една инстанция трябва да знае, за да попита „има ли нещо ново".
 
-## Файлове
+Auto-updated от release workflow-а на [Tockyto/docflow](https://github.com/Tockyto/docflow) (private).
 
-- **`manifest.json`** — текущата стабилна версия + image references + changelog URL
-- **`changelog.json`** — публичен changelog (само user-facing полета: version/date/improvements; вътрешните дев бележки НЕ се публикуват)
-
-## Schema (manifest.json)
+## `manifest.json`
 
 ```json
 {
-  "latest": "1.9.3",
-  "released_at": "2026-04-28T17:30:00Z",
-  "min_compatible": "1.9.0",
-  "image": "ghcr.io/tockyto/docflow:1.9.3",
-  "updater_image": "ghcr.io/tockyto/docflow-updater:1.9.3",
-  "changelog_url": "https://raw.githubusercontent.com/Tockyto/docflow-manifest/main/changelog.json",
-  "schema_version": 1
+  "latest": "3.7.157",
+  "released_at": "2026-09-10T14:26:25Z",
+  "image": "ghcr.io/tockyto/docflow:3.7.157"
 }
 ```
 
-## Не git-pull/edit-вай ръчно
+| Поле | За какво |
+|---|---|
+| `latest` | версията, до която updater-ите форуърдват |
+| `released_at` | показва се в „Обновления" |
+| `image` | образът, който се дърпа (**private** — иска автентикация) |
 
-Този repo е managed automatically. Ръчни промени се overwrite-ват при
-следващия release.
+## Какво НЕ е тук
+
+- **Код** — той е в private repo.
+- **Образи** — `ghcr.io/tockyto/docflow` е private; анонимен достъп получава `403`.
+- **Changelog** — падна на 10.09.2026. Беше 638 KB / 972 записа и никой не го четеше:
+  всяка инстанция показва своя локален през `/api/changelog`.
+- **Вътрешни дев бележки** — никога не са излизали оттук; сървърната защита е
+  `services/changelog_service.py::to_public` и се пази от тестове.
+- **Нищо тенант-специфично** — без адреси, имена на клиенти, брой инстанции.
+
+## Защо е публично
+
+За да може инстанция да провери за нова версия **без тайна**. Затварянето му би
+изисквало токен на всяка машина — нова ротируема тайна и нова тиха точка на отказ
+(изтече ли, обновяванията спират, без нищо да гръмне). Вместо това тук няма какво
+да се научи: три полета, от които същественото е един номер на версия.
